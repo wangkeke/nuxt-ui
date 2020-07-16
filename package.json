@@ -1,0 +1,43 @@
+{
+    "name": "duicai",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "nuxt",
+        "build": "nuxt build",
+        "start": "nuxt start",
+        "export": "nuxt export",
+        "serve": "nuxt serve",
+        "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
+        "lint": "npm run lint:js"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.30",
+        "@fortawesome/free-solid-svg-icons": "^5.14.0",
+        "@fortawesome/vue-fontawesome": "^0.1.10",
+        "@nuxtjs/axios": "^5.12.0",
+        "bulma": "^0.9.0",
+        "dplayer": "^1.26.0",
+        "element-ui": "^2.13.2",
+        "ionicons": "^5.1.2",
+        "nuxt": "^2.13.0",
+        "videojs": "^1.0.0",
+        "videojs-contrib-ads": "^6.6.5",
+        "videojs-contrib-hls": "^5.15.0",
+        "videojs-hlsjs-plugin": "^1.0.5",
+        "videojs-record": "^4.0.0",
+        "videojs-vimeo": "^2.0.2",
+        "vue-dplayer": "0.0.10",
+        "vue-video-player": "^5.0.2"
+    },
+    "devDependencies": {
+        "@nuxtjs/eslint-config": "^3.0.0",
+        "@nuxtjs/eslint-module": "^2.0.0",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.2.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-nuxt": "^1.0.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "prettier": "^2.0.5"
+    }
+}
