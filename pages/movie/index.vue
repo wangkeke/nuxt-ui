@@ -1,266 +1,192 @@
 <template>
     <div>
-        <nav
-            class="navbar is-dark is-fixed-top is-widescreen"
-            style="padding: 0 12rem;"
-            role="navigation"
-            aria-label="main navigation"
-        >
-            <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
-                    <img
-                        src="https://bulma.io/images/bulma-logo-white.png"
-                        width="112"
-                        height="28"
-                    />
-                </a>
-                <div class="navbar-item">
-                    <GlobalSearch
-                        v-bind:restaurants="restaurants"
-                        v-bind:options="cates"
-                    ></GlobalSearch>
+      <el-backtop></el-backtop>
+        <Header nav="movie" title="电影"/>
+        <div class="section">
+          <div class="container">
+                <div class="card">
+                  <div class="card-content py-0 px-0">
+                        <el-container>
+                            <el-main>
+                                <el-row>
+                                    <div class="content">
+                                        <el-form ref="form">
+                                            <el-form-item
+                                                label="类型"
+                                                class="mb-0"
+                                            >
+                                                <el-radio-group
+                                                    v-model="condition.type"
+                                                    size="small"
+                                                    @change="typeChange"
+                                                >
+                                                  <el-radio-button
+                                                    label=""
+                                                  >全部</el-radio-button>
+                                                    <el-radio-button
+                                                        label="动作"
+                                                    ></el-radio-button>
+                                                    <el-radio-button
+                                                        label="喜剧"
+                                                    ></el-radio-button>
+                                                    <el-radio-button
+                                                        label="恐怖"
+                                                    ></el-radio-button>
+                                                    <el-radio-button
+                                                        label="犯罪"
+                                                    ></el-radio-button>
+                                                </el-radio-group>
+                                            </el-form-item>
+                                            <el-form-item
+                                                label="地区"
+                                                class="mb-0"
+                                            >
+                                                <el-radio-group
+                                                    v-model="condition.country"
+                                                    size="small"
+                                                    @change="countryChange"
+                                                >
+                                                  <el-radio-button
+                                                    label=""
+                                                  >全部</el-radio-button>
+                                                    <el-radio-button
+                                                        label="大陆"
+                                                    >大陆</el-radio-button>
+                                                    <el-radio-button
+                                                        label="香港"
+                                                    >香港</el-radio-button>
+                                                    <el-radio-button
+                                                        label="台湾"
+                                                    >台湾</el-radio-button>
+                                                  <el-radio-button
+                                                    label="日本"
+                                                  >日本</el-radio-button>
+                                                  <el-radio-button
+                                                    label="韩国"
+                                                  >韩国</el-radio-button>
+                                                  <el-radio-button
+                                                    label="泰国"
+                                                  >泰国</el-radio-button>
+                                                    <el-radio-button
+                                                        label="美国"
+                                                    >美国</el-radio-button>
+                                                  <el-radio-button
+                                                    label="其他"
+                                                  >其他</el-radio-button>
+                                                </el-radio-group>
+                                            </el-form-item>
+                                            <el-form-item
+                                                label="年代"
+                                                class="mb-0"
+                                            >
+                                                <el-radio-group
+                                                    v-model="condition.years"
+                                                    size="small"
+                                                    @change="yearsChange"
+                                                >
+                                                  <el-radio-button
+                                                    label=""
+                                                  >全部</el-radio-button>
+                                                    <el-radio-button
+                                                        label="2020-2019"
+                                                    >2020-2019</el-radio-button>
+                                                    <el-radio-button
+                                                        label="2018-2016"
+                                                    >2018-2016</el-radio-button>
+                                                    <el-radio-button
+                                                        label="2015-2010"
+                                                    >2015-2010</el-radio-button>
+                                                    <el-radio-button
+                                                        label="2010-2005"
+                                                    >2010-2005</el-radio-button>
+                                                    <el-radio-button
+                                                        label="2005-2000"
+                                                    >2005-2000</el-radio-button>
+                                                    <el-radio-button
+                                                        label="1990"
+                                                    >90年代</el-radio-button>
+                                                    <el-radio-button
+                                                        label="1980"
+                                                    >80年代</el-radio-button>
+                                                </el-radio-group>
+                                            </el-form-item>
+                                            <el-form-item
+                                                label="排序"
+                                                class="mb-0"
+                                            >
+                                                <el-radio-group
+                                                    v-model="condition.order"
+                                                    size="small"
+                                                    @change="orderChange"
+                                                >
+                                                    <el-radio-button
+                                                        label="1"
+                                                    >最近热播</el-radio-button>
+                                                    <el-radio-button
+                                                        label="2"
+                                                    >最新上架</el-radio-button>
+                                                    <el-radio-button
+                                                        label="3"
+                                                    >高分好评</el-radio-button>
+                                                </el-radio-group>
+                                            </el-form-item>
+                                        </el-form>
+                                    </div>
+                                </el-row>
+                                <el-row><el-divider class="my-3"></el-divider></el-row>
+                                <ResourceList v-on:page-change="pageChange" v-bind:resource="resource" v-bind:columns="6"/>
+                            </el-main>
+                        </el-container>
+                    </div>
                 </div>
             </div>
-
-            <div class="navbar-menu">
-                <div class="navbar-start"></div>
-
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <el-button size="medium" type="primary"
-                            >上传<i class="el-icon-upload el-icon--right"></i
-                        ></el-button>
-                    </div>
-                    <div class="navbar-item">
-                        <el-button size="medium" type="primary"
-                            >创建账户</el-button
-                        >
-                        <el-button size="medium">登 录</el-button>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <!-- main container -->
-        <div class="container white-bg-block">
-            <el-container>
-                <el-header>
-                    <el-row style="margin: 1rem;">
-                        <el-divider content-position="left">
-                            <el-breadcrumb separator="/">
-                                <el-breadcrumb-item :to="{ path: '/' }"
-                                    >首页</el-breadcrumb-item
-                                >
-                                <el-breadcrumb-item>电影</el-breadcrumb-item>
-                            </el-breadcrumb>
-                        </el-divider>
-                    </el-row>
-                </el-header>
-                <!--              <el-main style="padding-top: 0;">-->
-                <!--                    -->
-                <!--                  </el-main>-->
-                <el-main>
-                    <el-row>
-                        <div class="content">
-                            <el-form
-                                ref="form"
-                                :model="form"
-                                label-width="130px"
-                            >
-                                <el-form-item
-                                    style="margin-bottom: 10px;"
-                                    label="类型"
-                                >
-                                    <el-radio-group
-                                        v-model="radio1"
-                                        size="small"
-                                    >
-                                        <el-radio-button
-                                            label="动作"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="喜剧"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="恐怖"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="犯罪"
-                                        ></el-radio-button>
-                                    </el-radio-group>
-                                </el-form-item>
-                                <el-form-item
-                                    style="margin-bottom: 10px;"
-                                    label="地区"
-                                >
-                                    <el-radio-group
-                                        v-model="radio2"
-                                        size="small"
-                                    >
-                                        <el-radio-button
-                                            label="大陆"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="香港"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="台湾"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="美国"
-                                        ></el-radio-button>
-                                    </el-radio-group>
-                                </el-form-item>
-                                <el-form-item
-                                    style="margin-bottom: 10px;"
-                                    label="年代"
-                                >
-                                    <el-radio-group
-                                        v-model="radio3"
-                                        size="small"
-                                    >
-                                        <el-radio-button
-                                            label="2020-2019"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="2018-2015"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="2015-2010"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="2010-2005"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="2005-2000"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="90年代"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="80年代"
-                                        ></el-radio-button>
-                                    </el-radio-group>
-                                </el-form-item>
-                                <el-form-item
-                                    style="margin-bottom: 10px;"
-                                    label="排序"
-                                >
-                                    <el-radio-group
-                                        v-model="radio4"
-                                        size="small"
-                                    >
-                                        <el-radio-button
-                                            label="最近热播"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="最新上架"
-                                        ></el-radio-button>
-                                        <el-radio-button
-                                            label="高分好评"
-                                        ></el-radio-button>
-                                    </el-radio-group>
-                                </el-form-item>
-                            </el-form>
-                        </div>
-                    </el-row>
-                    <el-row><el-divider></el-divider></el-row>
-                    <el-row :gutter="12">
-                        <el-col :span="4" style="margin-bottom: 1rem;">
-                            <el-card shadow="hover">
-                                鼠标悬浮时显示
-                            </el-card>
-                        </el-col>
-                        <el-col :span="4" style="margin-bottom: 1rem;">
-                            <el-card shadow="hover">
-                                鼠标悬浮时显示
-                            </el-card>
-                        </el-col>
-                        <el-col :span="4" style="margin-bottom: 1rem;">
-                            <el-card shadow="hover">
-                                鼠标悬浮时显示
-                            </el-card>
-                        </el-col>
-                        <el-col :span="4" style="margin-bottom: 1rem;">
-                            <el-card shadow="hover">
-                                鼠标悬浮时显示
-                            </el-card>
-                        </el-col>
-                        <el-col :span="4" style="margin-bottom: 1rem;">
-                            <el-card shadow="hover">
-                                鼠标悬浮时显示
-                            </el-card>
-                        </el-col>
-                        <el-col :span="4" style="margin-bottom: 1rem;">
-                            <el-card shadow="hover">
-                                鼠标悬浮时显示
-                            </el-card>
-                        </el-col>
-                        <el-col :span="4" style="margin-bottom: 1rem;">
-                            <el-card shadow="hover">
-                                鼠标悬浮时显示
-                            </el-card>
-                        </el-col>
-                        <el-col :span="4" style="margin-bottom: 1rem;">
-                            <el-card shadow="hover">
-                                鼠标悬浮时显示
-                            </el-card>
-                        </el-col>
-                    </el-row>
-                    <el-row
-                        align="right"
-                        style="margin-bottom: 1.5rem; text-align: right;"
-                    >
-                        <el-pagination
-                            background
-                            @size-change="handleSizeChange"
-                            @current-change="handleCurrentChange"
-                            :current-page.sync="currentPage3"
-                            :page-size="100"
-                            layout="prev, pager, next, jumper"
-                            :total="1000"
-                        >
-                        </el-pagination>
-                    </el-row>
-                </el-main>
-            </el-container>
         </div>
-        <div class="container">
-            <footer class="footer" style="background-color: inherit;">
-                <div class="content has-text-centered">
-                    <p>
-                        <strong>Bulma</strong> by
-                        <a href="https://jgthms.com">Jeremy Thomas</a>. The
-                        source code is licensed
-                        <a href="http://opensource.org/licenses/mit-license.php"
-                            >MIT</a
-                        >. The website content is licensed
-                        <a
-                            href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
-                            >CC BY NC SA 4.0</a
-                        >.
-                    </p>
-                </div>
-            </footer>
-        </div>
+        <Footer />
     </div>
 </template>
 <script>
-import GlobalSearch from '@/components/GlobalSearch'
+  import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import ResourceList from "@/components/ResourceList"
 
 export default {
-    asyncData({ $axios }) {
-        $axios.$get(`/api/moviesource/_search`).then((res) => {
-            return { restaurants: res.data.restaurants }
-        })
-    },
-    components: [GlobalSearch],
+  async asyncData(context){
+    const {data} = await context.$axios.get('/api/movie/query', { params:context.query })
+    return {resource : data}
+  },
+  components: [Header, Footer, ResourceList],
     data() {
-        return {
-            radio1: '',
-            radio2: '',
-            radio3: '',
-            radio4: '',
-        }
+      return {
+        condition: this.$route.query,
+      }
+    },
+  methods: {
+      typeChange(value){
+        this.condition.type=value
+      },
+      countryChange(value){
+        this.condition.country=value
+      },
+      yearsChange(value){
+        this.condition.years=value
+      },
+      orderChange(value){
+        this.condition.order=value
+      },
+      locationChange(params){
+        const query = this.$router.history.current.query
+        const path = this.$router.history.current.path
+        const newQuery = JSON.parse(JSON.stringify(query))
+        Object.keys(params).forEach(k => {
+          newQuery[k] = params[k]
+        })
+        this.$router.push({ path, query: newQuery })
+        return newQuery
+      },
+      async pageChange(param){
+        const {data} = await this.$axios.get('/api/movie/query', { params: this.locationChange(param)})
+        this.resource = data
+      },
     },
 }
 </script>

@@ -48,6 +48,7 @@ export default {
         '@/plugins/element-ui',
         { src: '~plugins/videoplayer', ssr: false },
         { src: '~plugins/icon', ssr: false },
+        { src: '@/plugins/vue-dplayer', ssr: false },
     ],
     /*
      ** Auto import components
@@ -61,30 +62,26 @@ export default {
         // Doc: https://github.com/nuxt-community/eslint-module
         '@nuxtjs/eslint-module',
     ],
+
+    loading: {
+      color: '#00d1b2',
+      height: '3px',
+    },
     /*
      ** Nuxt.js modules
      */
     modules: ['@nuxtjs/axios'],
 
-    loading: {
-        color: '#00c58e',
-        height: '3px',
-    },
-
     axios: {
         proxy: true, // Can be also an object with default options
-        retries: 3,
-        debug: true,
     },
     proxy: {
-        '/api/': {
-            target: 'http://192.168.68.128:9200',
-            pathRewrite: { '^/api/': '' },
-        },
-        '/api2/': {
-            target: 'http://api.another-website.com',
-            pathRewrite: { '^/api2/': '' },
-        },
+      '/api/': { target: 'http://localhost:8081', pathRewrite: {'^/api/': ''} }
+    },
+    headers: {
+      common: {
+        'Accept': 'application/json, text/plain, */*'
+      },
     },
     /*
      ** Build configuration

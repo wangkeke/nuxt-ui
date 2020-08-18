@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="vjs-custom-skin">
         <video ref="videoPlayer" class="video-js"></video>
     </div>
 </template>
@@ -7,6 +7,7 @@
 <script>
 import 'videojs-contrib-hls'
 import videojs from 'video.js'
+import '@/assets/css/custom-video-theme.css'
 
 export default {
     name: 'VideoPlayer',

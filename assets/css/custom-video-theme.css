@@ -1,5 +1,6 @@
 .vjs-custom-skin > .video-js {
     width: 100%;
+    min-height: 600px;
     font-family: 'PingFang SC', 'Helvetica Neue', 'Hiragino Sans GB', 'Segoe UI',
         'Microsoft YaHei', '微软雅黑', sans-serif;
 }
