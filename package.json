@@ -23,7 +23,7 @@
         "element-ui": "^2.13.2",
         "hls.js": "^0.14.3",
         "ionicons": "^5.1.2",
-        "nuxt": "^2.13.0",
+        "nuxt": "^3.4.3",
         "videojs": "^1.0.0",
         "videojs-contrib-ads": "^6.6.5",
         "videojs-contrib-hls": "^5.15.0",
